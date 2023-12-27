@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynode-app
+  labels:
+    app: mynode-app
+    release: beta
+    type: poc
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mynode-app
+  template:
+    metadata:
+      labels:
+        app: mynode-app
+    spec:
+      containers:
+        - name: mynode-app
+          image: myousufhere/node-app
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '500m'
+          ports:
+            - containerPort: 3000
